@@ -13,10 +13,12 @@ frontend/ - React interface built with webpack
 ### Backend
 1. `cd backend`
 2. `npm install`
-3. Create `.env` and add your API keys, e.g.
+3. Create `.env` and add your API keys and MCP command, e.g.
 ```
 OPENAI_API_KEY=your-key
 ANTHROPIC_API_KEY=your-key
+MCP_COMMAND=npx
+MCP_ARGS=["-y","@modelcontextprotocol/server-filesystem","/path/to/dir"]
 ```
 4. `npm start`
 
@@ -33,7 +35,9 @@ The frontend dev server runs on http://localhost:3000 and proxies API requests t
 - LLM connectors for OpenAI and Anthropic are implemented. Other providers can be added in `backend/src/services/llm-service.js`.
 
 ## MCP
-MCP integration is represented by a stub in `backend/src/services/mcp-client.js`. Implement your own logic to connect via STDIO or SSE.
+`backend/src/services/mcp-client.js` now uses the official `@modelcontextprotocol/sdk`
+to connect via STDIO. Set `MCP_COMMAND` (and optional `MCP_ARGS`) in your `.env`
+to point to the MCP server command.
 
 ## PraisonAI
 The PraisonAI integration spawns the `praisonai` CLI. Agents are defined in temporary YAML files.
